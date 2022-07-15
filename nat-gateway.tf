@@ -1,0 +1,10 @@
+resource "aws_nat_gateway" "natgw" {
+  subnet_id     = aws_subnet.public-subnet.id
+  allocation_id = aws_eip.static-ip.id
+  tags = {
+    Name = "terra gw NAT"
+  }
+  # To ensure proper ordering, it is recommended to add an explicit dependency
+  # on the Internet Gateway for the VPC.
+  depends_on = [aws_internet_gateway.igw]
+}
