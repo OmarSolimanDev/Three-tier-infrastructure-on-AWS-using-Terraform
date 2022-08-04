@@ -79,7 +79,7 @@ resource "aws_security_group" "private-rds" {
   }
 
   tags = {
-    Name = "terra rds sg"
+    Name = "terra rds_db sg"
   }
 }
 # ---------------------- redis security group --------------------------
