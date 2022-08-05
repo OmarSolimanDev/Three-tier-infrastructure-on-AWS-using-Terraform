@@ -29,8 +29,9 @@ resource "aws_instance" "app_server" {
   associate_public_ip_address = false
   subnet_id                   = module.network.private_subnet-1_id
   key_name                    = aws_key_pair.generated_key.key_name
+  vpc_security_group_ids      = [aws_security_group.private-ssh.id]
+  user_data                   = file("startup_script.sh")
 
-  vpc_security_group_ids = [aws_security_group.private-ssh.id]
   tags = {
     Name = "App Server"
   }

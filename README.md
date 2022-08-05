@@ -44,7 +44,6 @@
     > --volume jenkins-data:/var/jenkins_home \
     > jenkins/jenkins:lts
    ```
-
 2. Run the following command `docker exec [container-id] cat /var/jenkins_home/secrets/initialAdminPassword` <br />
    to get the initial admin password, copy it!
 
@@ -62,7 +61,7 @@
 
 2. restart jenkins after the installation is complete <br>
    Note that: <br />
-   you hava to start the container agian manually by  <br />
+   you have to start the container again manually by  <br />
    typing the command `docker start [container-id]`
 
 3. Go to `Manage Jenkins| Manage Credentials | Add Credentials`
@@ -72,12 +71,8 @@
     * Access Key ID: [your Access Key]
     * Secret Access Key: [your Secret Access Key]
 
-4.
-
-
-13. Now refer to the `README.md` file  inside the `jenkins_deployment` directory to complete <br />
-    the installation guide.
-
+4. Install terraform to in the Jenkins container [setup](https://learn.hashicorp.com/tutorials/terraform/install-cli)<br />
+   
 ## Author
 
 [Omar Kamal ](https://www.linkedin.com/in/omar-soliman-617188208/)

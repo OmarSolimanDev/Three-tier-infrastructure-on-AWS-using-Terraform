@@ -1,11 +1,11 @@
 resource "aws_db_instance" "default" {
-  allocated_storage = var.rds_storage # 10 GB of storage
-  engine            = var.rds_engine_type
-  engine_version    = var.rds_engine_version
-  instance_class    = var.rds_instance_class
-  db_name           = "my_rds"
-  #username               = "omar"
-  #password               = 
+  allocated_storage      = var.rds_storage # 10 GB of storage
+  engine                 = var.rds_engine_type
+  engine_version         = var.rds_engine_version
+  instance_class         = var.rds_instance_class
+  db_name                = "my_rds"
+  username               = "omar"
+  password               = "123"
   parameter_group_name   = "default.mysql5.7"
   skip_final_snapshot    = true
   depends_on             = [var.rds_subnet_group_name]
