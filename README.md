@@ -37,11 +37,11 @@
 
 
 ## Steps
-1. Go to the `Terraform code` directory then Run `terraform apply --var-file dev.tfvars` in the terminal <br />
+1. Go to the `Terraform-code` directory then Run `terraform apply --var-file dev.tfvars` in the terminal <br />
    to start the project <br />
    Note: <br />
    Before you run the command you need firstly to change some values passed in the `dev.tfvars` in order to <br />
-   connect to your project properly
+   adjust your project properly
 
 2. Connect to the newly created bastion host `gcloud compute ssh gke-bastion  --project=omar-gcp-project-1` <br />
    Note that: <br />
