@@ -1,21 +1,19 @@
-# A CI/CD Pipeline On AWS Platform Using Terraform
+# A CI/CD Pipeline On AWS Platform Using Terraform & Jenkins
 
 ## Project's Description
 
-- Project aim is to build a full CI/CD pipeline on a AWS Platform
-- this 
+- Project aim is to build a two CI/CD pipeline on a AWS Platform
+- The first pipeline is for building the infrastructure
+- The seconed pipeline is for building and deploying the nodeJS application
 - Building a docker image from a nodejs application
 - Using Dockerhub as our image repository to push the image to it
-- Deploying the python application on a GKE cluster 
-
 
 ## Requirments
 
 1. Linux os, Windows or Mac os  
-2. A gcp account with a project and enabling billing account for it
-3. The google cloud cli (gcloud) to be installed on your local machine [ Setup ](https://cloud.google.com/sdk/docs/install)
-4. Authenticate your gcp account with the gcloud tool 
-5. Terraform to be installed 
+2. A valid AWS account  
+3. Docker to be installed on your machine 
+4. Deploy jenkins as container on your machine  [ Setup ](https://davelms.medium.com/run-jenkins-in-a-docker-container-part-1-docker-in-docker-7ca75262619d) 
 
 
 ## Building Network infrastructure using terraform 
