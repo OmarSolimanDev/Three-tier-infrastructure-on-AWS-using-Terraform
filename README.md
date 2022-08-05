@@ -23,11 +23,11 @@
 2. Created four subnets (two puplic subnets & two private subnets) 
 
 3. The bastion host is placed in a puplic subnet as it will later it will <br />
-    be used as an ssh jump host to the jenkins slave
+   be used as an ssh jump host to the jenkins slave
 
 4. The nodeJS application server is deployed in one of the private subnets
 
-5. allowing the http and ssh inboud internet access to the public subents
+5. Allowing the http and ssh inboud internet access to the public subents
 
 6. Denying all inboud internet access to the private subents
 
@@ -36,58 +36,44 @@
 ![](./images/network.png "The example")
 
 
-## Steps
-1. Go to the `Terraform-code` directory then Run `terraform apply --var-file dev.tfvars` in the terminal <br />
-   to start the project <br />
-   Note: <br />
-   Before you run the command you need firstly to change some values passed in the `dev.tfvars` in order to <br />
-   adjust your project properly
+## Jenkins Setup Steps
+1. After installing Docker on your local machine you need to run Jenkins as a container with <br />
+   a mounted volume in order to presist your data in case the container goes down <br />
+   ```
+   [omar@localhost ~]$ docker run -d  -p 80:8080 \
+    > --volume jenkins-data:/var/jenkins_home \
+    > jenkins/jenkins:lts
+   ```
 
-2. Connect to the newly created bastion host `gcloud compute ssh gke-bastion  --project=omar-gcp-project-1` <br />
+2. Run the following command `docker exec [container-id] cat /var/jenkins_home/secrets/initialAdminPassword` <br />
+   to get the initial admin password, copy it!
+
+3. go to your browser then type `localhost:80` it should display a page stating the jenkins is starting <br />
+
+4. Then it will ask for the admin password that you just copied <br />
+![](./images/jenkins.png "The example")
+
+5. Then click on `install recomended plugins` option
+
+
+## Jenkins Configuration Steps
+
+1. Install the `CloudBees AWS Credentials` plugin
+
+2. restart jenkins after the installation is complete <br>
    Note that: <br />
-   there is no puplic ip added so gcloud will use the IAP tunneling to reach the bastion host <br />
-     
-3. Authenticate your account with the gcloud tool `gcloud auth login` it will pop up a browswer page  <br /> 
-   where you can login with your gcp account
+   you hava to start the container agian manually by  <br />
+   typing the command `docker start [container-id]`
 
-4. Inside the `jenkins_deployment` directory you will find deployments, service templates files which will <br />
-   be used to create jenkins master pod to build the pipline
+3. Go to `Manage Jenkins| Manage Credentials | Add Credentials`
+    * Kind:  `AWS Credentials`
+    * Scope: `Global`
+    * ID: `aws_cred`
+    * Access Key ID: [your Access Key]
+    * Secret Access Key: [your Secret Access Key]
 
-5. The bastion host  communicate with Master node due to the a startup script `startup_script.sh`  <br />
-    Note That: <br /> 
-    the startup script installs kubectl tool which is used to communicate with Master node, moreover <br />
-    we created a service account with `container.admin` premission to have full access to the gke <br />
-    cluster and attached it to the bastion host while creating the bastion host from the terraform <br />
-    code
+4.
 
-6. Now copy the kubernetes yaml files found in templates folder from your local machine to your <br />
-    bastion host, type in the terminal: <br />
-    `gcloud compute scp --recurse ../jenkins_deployment gke-bastion:~/ --project=omar-gcp-project-1` <br />
-    Note that: <br />
-    `gke-bastion` is the name of the bastion host
-
-7. Authenticate the kubectl with the gke cluster `gcloud container clusters get-credentials  my-gke-cluster `
-    Note that: <br />
-    `my-gke-cluster` is the name of the cluster 
-
-8. Change directory to `jenkins_deployment` by typing `cd ./jenkins_deployment`
-
-9. Inside the bastion host create the namespace that jenkins will run on `kubectl create namespace master`
-
-
-10. Inside the bastion host create the namespace that the deployed application will run on `kubectl create namespace dev`
-
-
-11. Now run the following command to start all deploymet and service files. `kubectl create -Rf .`<br />
-
-12. wait 1-2 minutes for the the jenkins pod to be running then run `kubectl get svc -n master`<br />
-![](./images/svc.png "svc")
-
-13. You need to get the initial admin password `kubectl logs [pod-id] -n master `.<br />
-![](./images/pass.png "admin password")
-
-12. Copy the  `External-ip:8080` address to your browser.<br />
-![](./images/browser.png "testing")
 
 13. Now refer to the `README.md` file  inside the `jenkins_deployment` directory to complete <br />
     the installation guide.
