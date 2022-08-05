@@ -24,10 +24,11 @@ resource "aws_instance" "bastion-server" {
 }
 
 resource "aws_instance" "app_server" {
-  ami           = data.aws_ami.myubuntu.id
-  instance_type = "t2.micro"
-  subnet_id     = module.network.private_subnet-1_id
-  key_name      = aws_key_pair.generated_key.key_name
+  ami                         = data.aws_ami.myubuntu.id
+  instance_type               = "t2.micro"
+  associate_public_ip_address = false
+  subnet_id                   = module.network.private_subnet-1_id
+  key_name                    = aws_key_pair.generated_key.key_name
 
   vpc_security_group_ids = [aws_security_group.private-ssh.id]
   tags = {
