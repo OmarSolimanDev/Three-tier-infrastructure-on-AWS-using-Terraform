@@ -1,5 +1,3 @@
-[application]
-172.16.2.20
 
 [application:vars]
 ansible_user = ubuntu

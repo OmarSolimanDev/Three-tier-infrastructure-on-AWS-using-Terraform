@@ -42,7 +42,7 @@ resource "aws_security_group" "private-ssh" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = [module.network.vpc_cidr_block]
+    cidr_blocks = ["0.0.0.0/0"]
 
   }
 
@@ -51,7 +51,7 @@ resource "aws_security_group" "private-ssh" {
     from_port   = 3000
     to_port     = 3000
     protocol    = "tcp"
-    cidr_blocks = [module.network.vpc_cidr_block]
+    cidr_blocks = ["0.0.0.0/0"]
 
   }
 
