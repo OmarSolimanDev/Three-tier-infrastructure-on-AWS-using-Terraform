@@ -6,7 +6,7 @@ resource "aws_instance" "bastion-server" {
   subnet_id                   = module.network.public_subnet-1_id
   key_name                    = aws_key_pair.generated_key.key_name
 
-  vpc_security_group_ids = [aws_security_group.allow_ssh.id]
+  vpc_security_group_ids = [aws_security_group.allow_ssh_http.id]
 
   provisioner "local-exec" {
     command = "echo ${self.public_ip}"
