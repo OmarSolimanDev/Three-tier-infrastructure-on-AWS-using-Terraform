@@ -18,14 +18,20 @@
 
 ## Building Network infrastructure using terraform 
 
-1. Created a vpc 
-2. Created two subnets (managed & restricted) in the europe region
-3. The bastion host is placed in the managed subnet as it will later it will <br />
-    be used to control the GKE cluster
-4. The GKE working nodes are placed in the restricted subnet     
-5. Denying all inboud internet access to the subents 
-6. Created a firewall allowing only The IAP range to access 
-7. Created a nat-gateway in order that my resources that will be created later <br />
+1. Creating a vpc 
+
+2. Created four subnets (two puplic subnets & two private subnets) 
+
+3. The bastion host is placed in a puplic subnet as it will later it will <br />
+    be used as an ssh jump host to the jenkins slave
+
+4. The nodeJS application server is deployed in one of the private subnets
+
+5. allowing the http and ssh inboud internet access to the public subents
+
+6. Denying all inboud internet access to the private subents
+
+7. Created a nat-gateway in order that my resources in the private subnets <br />
    can access the internet safely<br /> 
 ![](./images/network.png "The example")
 
