@@ -1,4 +1,4 @@
-variable "engine_type" {
+variable "redis_engine_type" {
   type = string
 }
 variable "redis_engine_version" {
@@ -7,7 +7,7 @@ variable "redis_engine_version" {
 variable "redis_node_type" {
   type = string
 }
-variable "no_of_nodes" {
+variable "redis_no_of_nodes" {
   type        = string
   description = "number of redis nodes"
 }
