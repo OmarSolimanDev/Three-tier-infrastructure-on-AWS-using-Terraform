@@ -33,7 +33,7 @@ module "elastic_cache" {
   redis_node_type          = var.redis_node_type
   no_of_nodes              = var.no_of_nodes
   redis_port               = var.redis_port
-  subnet_group_name        = module.network.redis-subnet-group_name
+  redis_subnet_group_name  = module.network.redis-subnet-group_name
   redis_vpc_security_group = aws_security_group.private-redis.id
 
 }

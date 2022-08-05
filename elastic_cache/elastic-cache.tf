@@ -1,11 +1,11 @@
 resource "aws_elasticache_cluster" "redis-elasticache" {
   cluster_id           = "redis-cluster"
-  engine               = "redis"
-  engine_version       = "3.2.10"
-  node_type            = "cache.t2.micro"
-  num_cache_nodes      = 1
+  engine               = var.engine_type
+  engine_version       = var.redis_engine_version
+  node_type            = var.redis_node_type
+  num_cache_nodes      = var.no_of_nodes
   parameter_group_name = "default.redis3.2"
   port                 = 6379
-  subnet_group_name    = module.network.redis-subnet-group_name
-  security_group_ids   = [aws_security_group.private-redis.id]
+  subnet_group_name    = var.redis_subnet_group_name
+  security_group_ids   = [var.redis_vpc_security_group]
 }
