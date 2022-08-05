@@ -5,7 +5,7 @@ resource "aws_db_instance" "default" {
   instance_class         = var.rds_instance_class
   db_name                = "my_rds"
   username               = "omar"
-  password               = "123"
+  password               = "12345678"
   parameter_group_name   = "default.mysql5.7"
   skip_final_snapshot    = true
   depends_on             = [var.rds_subnet_group_name]
