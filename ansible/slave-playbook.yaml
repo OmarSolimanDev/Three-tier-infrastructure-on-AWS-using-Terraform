@@ -1,0 +1,67 @@
+- name: jenkins_slave
+  hosts: application
+  user: ubuntu
+  become: yes
+
+  tasks:
+  - name: update apt
+    apt:
+      update_cache: yes
+
+  - name: create dir
+    file:
+      name: jenkins_home
+      state: directory
+      mode: 0777
+
+  - name: install openjdk
+    apt:
+      name: openjdk-8-jdk
+      state: present
+
+  - name: install git
+    apt:
+      name: git
+      state: present
+      update_cache: yes
+
+  - name: Add Docker GPG apt Key
+    apt_key:
+      url: https://download.docker.com/linux/ubuntu/gpg
+      state: present
+
+  - name: Add Docker Repository
+    apt_repository:
+      repo: deb https://download.docker.com/linux/ubuntu focal stable
+      state: present
+
+  - name: Update apt and install docker-ce
+    apt:
+      name: docker-ce
+      state: latest
+      update_cache: true
+
+  - name: Create docker group
+    group:
+      name: docker
+      state: present
+
+  - name: Add user to the docker group
+    user:
+      name: ubuntu
+      groups: docker
+      append: yes
+  
+  - name: create dir
+    file:
+      name: /home/ubuntu/bin
+      state: directory
+      mode: 0777
+  
+  - name: copy agent.jar to jenkins_home
+    copy:
+      src: agent.jar
+      dest: /home/ubuntu/bin/agent.jar
+      owner: ubuntu
+      group: ubuntu
+      mode: 0777

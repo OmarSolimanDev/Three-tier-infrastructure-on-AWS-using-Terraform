@@ -72,6 +72,28 @@
     * Secret Access Key: [your Secret Access Key]
 
 4. Install terraform to in the Jenkins container [setup](https://learn.hashicorp.com/tutorials/terraform/install-cli)<br />
+
+5. Adding pipline 
+```
+pipeline {
+    agent any
+    stages {
+        stage('Building infra on AWS') {
+            steps {
+				withAWS(credentials:'aws_cred', region:'us-east-1'){
+                sh 'echo hello'
+                git 'https://github.com/OmarSolimanDev/Three-tier-infrastructure-on-AWS-using-Terraform.git'
+				sh 'terraform -chdir=./Terraform-code/ init'    
+				sh 'terraform -chdir=./Terraform-code/ apply --var-file dev.tfvars -auto-approve'
+				    
+				}
+            }
+            
+        }
+    }
+}
+```
+
    
 ## Author
 

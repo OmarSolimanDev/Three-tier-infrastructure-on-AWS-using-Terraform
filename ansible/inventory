@@ -1,0 +1,5 @@
+[application]
+172.16.2.20
+ansible_port = 22
+private_key_file = /home/omar/omar/iti/terraform/lab01/Terraform-code/myKey.pem
+ansible_ssh_common_args = '-o ProxyCommand="ssh -i /home/omar/omar/iti/terraform/lab01/Terraform-code/myKey.pem -W %h:%p -q ubuntu@18.223.125.187"'
