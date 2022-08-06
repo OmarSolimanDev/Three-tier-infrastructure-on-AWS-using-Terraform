@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+    stages {
+        stage('Building infra on AWS') {
+            steps {
+				withAWS(credentials:'aws_cred', region:'us-east-1'){
+                sh 'echo hello'
+                git 'https://github.com/OmarSolimanDev/Three-tier-infrastructure-on-AWS-using-Terraform.git'
+				sh 'terraform -chdir=./Terraform-code/ init'    
+				sh 'terraform -chdir=./Terraform-code/ apply --var-file dev.tfvars -auto-approve'
+				    
+				}
+            }
+            
+        }
+    }
+}

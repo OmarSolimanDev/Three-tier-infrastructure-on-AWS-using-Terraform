@@ -148,9 +148,9 @@ pipeline {
       ProxyCommand ssh -W %h:%p bastionhost
       " > ~/.ssh/config
       ```
-      6. copy the private key.pem to `/root/`
+6. copy the private key.pem to `/root/`
 
-      7. exit the container by typing `exit`
+7. exit the container by typing `exit`
 ## Author
 
 [Omar Kamal ](https://www.linkedin.com/in/omar-soliman-617188208/)
