@@ -127,8 +127,9 @@ pipeline {
    ![](./images/ansible.png "The example")
 
 4. Now go to the jenkins container `docker exec -it  -u root [container-id] bash` <br />
-   * `mkdir ~/.ssh`
-   * `touch ~/.ssh/config`
+   * `cd /var/jenkins_home`
+   * `mkdir .ssh`
+   * `touch .ssh/config`
    * ``` 
       echo "
       ### First jump host. Directly reachable
@@ -148,9 +149,9 @@ pipeline {
       ProxyCommand ssh -W %h:%p bastionhost
       " > ~/.ssh/config
       ```
-6. copy the private key.pem to `/root/`
 
-7. exit the container by typing `exit`
+6. exit the container by typing `exit`
+7. copy the private key.pem to `docker cp [key.pem] [container id]:/var/jenkins_home/key.pem `
 ## Author
 
 [Omar Kamal ](https://www.linkedin.com/in/omar-soliman-617188208/)
