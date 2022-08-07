@@ -137,14 +137,14 @@ pipeline {
       Host bastionhost
       Hostname 18.223.125.187
       User ubuntu
-      IdentityFile /root/thekey.pem
+      IdentityFile /var/jenkins_home/key.pem
 
       ### Host to jump to via bastionhost
 
       Host application
       Hostname 172.16.2.20
       User ubuntu
-      IdentityFile /root/thekey.pem
+      IdentityFile /var/jenkins_home/key.pem
       Port 22
       ProxyCommand ssh -W %h:%p bastionhost
       " > ~/.ssh/config
