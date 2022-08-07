@@ -151,6 +151,7 @@ pipeline {
       ```
 
 6. exit the container by typing `exit`
+
 7. copy the private key.pem to `docker cp [key.pem] [container id]:/var/jenkins_home/key.pem `
 ## Author
 
